@@ -5,7 +5,7 @@ const [row]= await db.query('SELECT * FROM employes')
     return row;
 }
 
-module.exports.employeeById = async (id)=>{
+module.exports.employeeById = async (id)=>{   
 const [row]= await db.query('SELECT * FROM employes WHERE id = ?',[id])
     return row;
 }

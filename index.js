@@ -3,10 +3,7 @@ require('express-async-errors');
 const app = express();
 const db = require('./db');
 const bodyParser = require('body-parser');
-
-employeeRoutes = require('./controller/employee-controller')
-
-
+const employeeRoutes = require('./controller/employee-controller');
 
 // middleware
 app.use(bodyParser.json())
@@ -14,7 +11,6 @@ app.use('/api/employeeList',employeeRoutes)
 
 app.use((err,req,res,next)=>{
     console.log(err);
-
     res.status(err.status || 500).send('Something went wrong')
 })
 
