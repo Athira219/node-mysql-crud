@@ -4,10 +4,11 @@ const app = express();
 const db = require('./db');
 const bodyParser = require('body-parser');
 const employeeRoutes = require('./controller/employee-controller');
+const router = require('./router')
 
 // middleware
 app.use(bodyParser.json())
-app.use('/api/employeeList',employeeRoutes)
+app.use('/api',router)
 
 app.use((err,req,res,next)=>{
     console.log(err);
