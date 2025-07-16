@@ -4,27 +4,23 @@ const employeeService = require('./service/employee-service');
 
 // Get all employees
 router.get('/', async (req, res) => {
-  try {
-    const employees = await employeeService.allEmployeeList();
-    res.status(200).json(employees);
-  } catch (err) {
-    console.error(err);
+  employeeService.allEmployeeList().then((employee)=>{
+    res.status(200).json(employee)
+  }).catch((err)=>{
     res.status(500).json({ message: 'Internal Server Error' });
-  }
+  })
 });
 
 // Get employee by ID
 router.get('/:id', async (req, res) => {
-  try {
-    const employee = await employeeService.employeeById(req.params.id);
-    if (employee.length === 0) {
+employeeService.employeeById(req.params.id).then((employee)=>{
+  if (employee.length === 0) {
       return res.status(404).json({ message: 'No record with given id: ' + req.params.id });
     }
     res.status(200).json(employee);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
+  }).catch((err)=>{
+     res.status(500).json({ message: 'Internal Server Error' });
+  })
 });
 
 // Delete employee by ID
